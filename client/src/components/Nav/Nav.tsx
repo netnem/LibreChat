@@ -24,7 +24,7 @@ import store from '~/store';
 
 // Get the sidebar width from environment variables
 
-const SIDEBAR_WIDTH = process.env.REACT_APP_SIDEBAR_WIDTH || '400px';
+const SIDEBAR_WIDTH = process.env.REACT_APP_SIDEBAR_WIDTH || '260px';
 const SIDEBAR_MAX_WIDTH = `${parseInt(SIDEBAR_WIDTH, 10) + 60}px`;
 
 const Nav = ({ navVisible, setNavVisible }) => {

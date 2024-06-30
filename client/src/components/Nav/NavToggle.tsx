@@ -22,7 +22,7 @@ export default function NavToggle({
   const topBarRotation = side === 'right' ? `-${rotation}` : rotation;
   const bottomBarRotation = side === 'right' ? rotation : `-${rotation}`;
 
-  const SIDEBAR_WIDTH = process.env.REACT_APP_SIDEBAR_WIDTH || '400px';
+  const SIDEBAR_WIDTH = process.env.REACT_APP_SIDEBAR_WIDTH || '260px';
   return (
     <div
     className={cn(
