@@ -22,11 +22,16 @@ import { cn } from '~/utils';
 import { ConversationListResponse } from 'librechat-data-provider';
 import store from '~/store';
 
+// Get the sidebar width from environment variables
+
+const SIDEBAR_WIDTH = process.env.REACT_APP_SIDEBAR_WIDTH || '400px';
+const SIDEBAR_MAX_WIDTH = `${parseInt(SIDEBAR_WIDTH, 10) + 60}px`;
+
 const Nav = ({ navVisible, setNavVisible }) => {
   const { conversationId } = useParams();
   const { isAuthenticated } = useAuthContext();
 
-  const [navWidth, setNavWidth] = useState('260px');
+  const [navWidth, setNavWidth] = useState(SIDEBAR_WIDTH);
   const [isHovering, setIsHovering] = useState(false);
   const isSmallScreen = useMediaQuery('(max-width: 768px)');
   const [newUser, setNewUser] = useLocalStorage('newUser', true);
@@ -46,9 +51,9 @@ const Nav = ({ navVisible, setNavVisible }) => {
       if (savedNavVisible === null) {
         toggleNavVisible();
       }
-      setNavWidth('320px');
+      setNavWidth(SIDEBAR_MAX_WIDTH);
     } else {
-      setNavWidth('260px');
+      setNavWidth(SIDEBAR_WIDTH);
     }
   }, [isSmallScreen]);
 
@@ -108,7 +113,7 @@ const Nav = ({ navVisible, setNavVisible }) => {
         <div
           data-testid="nav"
           className={
-            'nav active max-w-[320px] flex-shrink-0 overflow-x-hidden bg-gray-50 dark:bg-gray-850 md:max-w-[260px]'
+            `nav active max-w-[${SIDEBAR_MAX_WIDTH}] flex-shrink-0 overflow-x-hidden bg-gray-50 dark:bg-gray-850 md:max-w-[${SIDEBAR_WIDTH}]`
           }
           style={{
             width: navVisible ? navWidth : '0px',
@@ -116,7 +121,7 @@ const Nav = ({ navVisible, setNavVisible }) => {
             transition: 'width 0.2s, visibility 0.2s',
           }}
         >
-          <div className="h-full w-[320px] md:w-[260px]">
+          <div className={`h-full w-[${SIDEBAR_MAX_WIDTH}] md:w-[${SIDEBAR_WIDTH}]`}>
             <div className="flex h-full min-h-0 flex-col">
               <div
                 className={cn(
@@ -175,3 +180,4 @@ const Nav = ({ navVisible, setNavVisible }) => {
 };
 
 export default memo(Nav);
+

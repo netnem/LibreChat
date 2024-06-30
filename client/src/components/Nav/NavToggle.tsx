@@ -22,16 +22,19 @@ export default function NavToggle({
   const topBarRotation = side === 'right' ? `-${rotation}` : rotation;
   const bottomBarRotation = side === 'right' ? rotation : `-${rotation}`;
 
+  const SIDEBAR_WIDTH = process.env.REACT_APP_SIDEBAR_WIDTH || '400px';
   return (
     <div
-      className={cn(
-        className,
-        '-translate-y-1/2 transition-transform',
-        navVisible ? 'rotate-0' : 'rotate-180',
-        navVisible && translateX ? 'translate-x-[260px]' : 'translate-x-0 ',
-      )}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
+    className={cn(
+      className,
+      '-translate-y-1/2 transition-transform',
+      navVisible ? 'rotate-0' : 'rotate-180'
+    )}
+    style={{
+      transform: navVisible && translateX ? `translateX(${SIDEBAR_WIDTH})` : 'translateX(0)',
+    }}
+    onMouseEnter={() => setIsHovering(true)}
+    onMouseLeave={() => setIsHovering(false)}
     >
       <TooltipTrigger asChild>
         <button onClick={onToggle}>
